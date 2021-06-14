@@ -1,5 +1,8 @@
 package se.lexicon.service.implementation;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import se.lexicon.dao.interfaces.PersonDAO;
 import se.lexicon.dao.interfaces.PersonIdSequencer;
 import se.lexicon.model.dto.PersonDTO;
@@ -15,6 +18,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class PersonServiceImpl implements PersonService {
 
     private final PersonDAO dao;
@@ -22,6 +26,7 @@ public class PersonServiceImpl implements PersonService {
     private final PersonFactoryService factoryService;
     private final UserCredentialsService userCredentialsService;
 
+    @Autowired
     public PersonServiceImpl(PersonDAO dao, PersonIdSequencer sequencer, PersonFactoryService factoryService, UserCredentialsService userCredentialsService) {
         this.dao = dao;
         this.sequencer = sequencer;

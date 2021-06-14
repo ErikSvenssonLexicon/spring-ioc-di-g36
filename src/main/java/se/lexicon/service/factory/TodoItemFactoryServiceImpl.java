@@ -1,5 +1,7 @@
 package se.lexicon.service.factory;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import se.lexicon.model.dto.PersonDTOBasic;
 import se.lexicon.model.dto.TodoItemDTO;
 import se.lexicon.model.dto.TodoItemDTOBasic;
@@ -11,11 +13,13 @@ import se.lexicon.service.factory.interfaces.TodoItemFactoryService;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class TodoItemFactoryServiceImpl implements TodoItemFactoryService {
 
     private PersonFactoryService personFactoryService;
 
 
+    @Autowired
     public void setPersonFactoryService(PersonFactoryService personFactoryService) {
         this.personFactoryService = personFactoryService;
     }

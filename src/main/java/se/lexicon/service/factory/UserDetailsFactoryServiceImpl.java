@@ -1,14 +1,19 @@
 package se.lexicon.service.factory;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import se.lexicon.model.dto.UserCredentialsDTO;
 import se.lexicon.model.entity.UserCredentials;
 import se.lexicon.service.factory.interfaces.PersonFactoryService;
 import se.lexicon.service.factory.interfaces.UserCredentialsFactoryService;
 
+@Component
 public class UserDetailsFactoryServiceImpl implements UserCredentialsFactoryService {
 
     private PersonFactoryService personFactoryService;
 
+    @Autowired
     public void setPersonFactoryService(PersonFactoryService personFactoryService) {
         this.personFactoryService = personFactoryService;
     }

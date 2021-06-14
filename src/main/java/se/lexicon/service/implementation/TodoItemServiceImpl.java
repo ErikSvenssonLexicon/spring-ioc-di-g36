@@ -1,5 +1,7 @@
 package se.lexicon.service.implementation;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import se.lexicon.dao.interfaces.PersonDAO;
 import se.lexicon.dao.interfaces.TodoItemDAO;
 import se.lexicon.dao.interfaces.TodoItemIdSequencer;
@@ -17,6 +19,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class TodoItemServiceImpl implements TodoItemService {
 
     private final UserCredentialsDAO userCredentialsDAO;
@@ -25,6 +28,7 @@ public class TodoItemServiceImpl implements TodoItemService {
     private final TodoItemFactoryService todoItemFactoryService;
     private final TodoItemIdSequencer sequencer;
 
+    @Autowired
     public TodoItemServiceImpl(UserCredentialsDAO userCredentialsDAO, PersonDAO personDAO, TodoItemDAO todoItemDAO, TodoItemFactoryService todoItemFactoryService, TodoItemIdSequencer sequencer) {
         this.userCredentialsDAO = userCredentialsDAO;
         this.personDAO = personDAO;
