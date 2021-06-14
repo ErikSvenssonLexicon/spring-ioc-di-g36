@@ -1,5 +1,6 @@
 package se.lexicon.dao;
 
+import org.springframework.stereotype.Component;
 import se.lexicon.dao.interfaces.UserCredentialsDAO;
 import se.lexicon.model.entity.UserCredentials;
 
@@ -8,6 +9,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@Component
 public class UserCredentialsDAOCollectionImpl implements UserCredentialsDAO {
 
     private final Set<UserCredentials> storage;

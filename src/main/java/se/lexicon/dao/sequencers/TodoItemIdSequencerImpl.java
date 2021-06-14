@@ -1,7 +1,9 @@
 package se.lexicon.dao.sequencers;
 
+import org.springframework.stereotype.Component;
 import se.lexicon.dao.interfaces.TodoItemIdSequencer;
 
+@Component
 public class TodoItemIdSequencerImpl implements TodoItemIdSequencer {
 
     private int number;

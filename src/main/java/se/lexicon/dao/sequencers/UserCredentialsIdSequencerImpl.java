@@ -1,7 +1,9 @@
 package se.lexicon.dao.sequencers;
 
+import org.springframework.stereotype.Component;
 import se.lexicon.dao.interfaces.UserCredentialsIdSequencer;
 
+@Component
 public class UserCredentialsIdSequencerImpl implements UserCredentialsIdSequencer {
 
     private int number;
