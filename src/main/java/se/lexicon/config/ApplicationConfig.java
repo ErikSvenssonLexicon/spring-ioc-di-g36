@@ -1,6 +1,5 @@
 package se.lexicon.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,14 +9,9 @@ import se.lexicon.dao.UserCredentialsDAOCollectionImpl;
 import se.lexicon.dao.sequencers.PersonIdSequencerImpl;
 import se.lexicon.dao.sequencers.TodoItemIdSequencerImpl;
 import se.lexicon.dao.sequencers.UserCredentialsIdSequencerImpl;
-import se.lexicon.service.factory.PersonFactoryServiceImpl;
-import se.lexicon.service.factory.TodoItemFactoryServiceImpl;
-import se.lexicon.service.factory.UserDetailsFactoryServiceImpl;
-import se.lexicon.service.factory.interfaces.PersonFactoryService;
-import se.lexicon.service.factory.interfaces.TodoItemFactoryService;
-import se.lexicon.service.factory.interfaces.UserCredentialsFactoryService;
 
 @Configuration
+@ComponentScan(basePackages = "se.lexicon.config")
 public class ApplicationConfig {
 
     @Bean
@@ -49,17 +43,4 @@ public class ApplicationConfig {
     public UserCredentialsDAOCollectionImpl userCredentialsDAOCollectionImpl(){
         return new UserCredentialsDAOCollectionImpl();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

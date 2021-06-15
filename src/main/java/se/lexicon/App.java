@@ -13,11 +13,7 @@ public class App
     public static void main( String[] args )
     {
         AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext();
-
-        context.scan("se.lexicon.config");
-
-
+                new AnnotationConfigApplicationContext(ApplicationConfig.class);
 
         Stream.of(context.getBeanDefinitionNames()).forEach(System.out::println);
 
