@@ -3,7 +3,11 @@ package se.lexicon;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import se.lexicon.dao.interfaces.PersonDAO;
+import se.lexicon.model.entity.ApplicationRole;
 import se.lexicon.model.entity.Person;
+import se.lexicon.service.interfaces.PersonService;
+
+import java.util.stream.Stream;
 
 public class App
 {
@@ -12,13 +16,11 @@ public class App
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        PersonDAO personDAO = context.getBean(PersonDAO.class);
+        PersonService personService = context.getBean(PersonService.class);
 
-        System.out.println(personDAO.persist(new Person(
-                1, "Erik", "Svensson", "erik.svensson@lexicon.se", null
-        )));
-
-
+        System.out.println(
+                personService.create("nisse", "nisse123", ApplicationRole.APP_USER, "Nils", "Nilsson", "nils@gmail.com")
+        );
 
         context.close();
     }

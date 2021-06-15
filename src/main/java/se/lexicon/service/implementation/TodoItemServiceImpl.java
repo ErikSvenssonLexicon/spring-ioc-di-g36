@@ -10,7 +10,6 @@ import se.lexicon.model.entity.Person;
 import se.lexicon.model.entity.TodoItem;
 import se.lexicon.model.entity.UserCredentials;
 import se.lexicon.service.factory.interfaces.TodoItemFactoryService;
-import se.lexicon.service.interfaces.PersonService;
 import se.lexicon.service.interfaces.TodoItemService;
 
 import java.math.BigDecimal;
@@ -25,7 +24,12 @@ public class TodoItemServiceImpl implements TodoItemService {
     private final TodoItemFactoryService todoItemFactoryService;
     private final TodoItemIdSequencer sequencer;
 
-    public TodoItemServiceImpl(UserCredentialsDAO userCredentialsDAO, PersonDAO personDAO, TodoItemDAO todoItemDAO, TodoItemFactoryService todoItemFactoryService, TodoItemIdSequencer sequencer) {
+    public TodoItemServiceImpl(
+            UserCredentialsDAO userCredentialsDAO,
+            PersonDAO personDAO,
+            TodoItemDAO todoItemDAO,
+            TodoItemFactoryService todoItemFactoryService,
+            TodoItemIdSequencer sequencer) {
         this.userCredentialsDAO = userCredentialsDAO;
         this.personDAO = personDAO;
         this.todoItemDAO = todoItemDAO;

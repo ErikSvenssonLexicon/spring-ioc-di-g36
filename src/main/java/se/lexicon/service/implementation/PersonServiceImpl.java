@@ -22,7 +22,11 @@ public class PersonServiceImpl implements PersonService {
     private final PersonFactoryService factoryService;
     private final UserCredentialsService userCredentialsService;
 
-    public PersonServiceImpl(PersonDAO dao, PersonIdSequencer sequencer, PersonFactoryService factoryService, UserCredentialsService userCredentialsService) {
+    public PersonServiceImpl(
+            PersonDAO dao,
+            PersonIdSequencer sequencer,
+            PersonFactoryService factoryService,
+            UserCredentialsService userCredentialsService) {
         this.dao = dao;
         this.sequencer = sequencer;
         this.factoryService = factoryService;

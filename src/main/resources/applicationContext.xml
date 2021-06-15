@@ -15,10 +15,39 @@
     <bean id="todoItemDAOCollectionImpl" class="se.lexicon.dao.TodoItemDAOCollectionImpl"/>
     <bean id="userCredentialsDAOCollectionImpl" class="se.lexicon.dao.UserCredentialsDAOCollectionImpl"/>
 
-    
+    <!-- Setter injections -->
+    <bean id="personFactoryServiceImpl" class="se.lexicon.service.factory.PersonFactoryServiceImpl">
+        <property name="userCredentialsFactoryService" ref="userCredentialsFactoryServiceImpl" />
+        <property name="todoItemFactoryService" ref="todoItemFactoryServiceImpl" />
+    </bean>
+
+    <bean id="userCredentialsFactoryServiceImpl" class="se.lexicon.service.factory.UserDetailsFactoryServiceImpl">
+        <property name="personFactoryService" ref="personFactoryServiceImpl" />
+    </bean>
+
+    <bean id="todoItemFactoryServiceImpl" class="se.lexicon.service.factory.TodoItemFactoryServiceImpl">
+        <property name="personFactoryService" ref="personFactoryServiceImpl" />
+    </bean>
+
+    <!-- Constructor injections -->
+    <bean id="personServiceImpl" class="se.lexicon.service.implementation.PersonServiceImpl">
+        <constructor-arg ref="personDAOCollectionImpl" />
+        <constructor-arg ref="personIdSequencerImpl" />
+        <constructor-arg ref="personFactoryServiceImpl" />
+        <constructor-arg ref="userCredentialsServiceImpl" />
+    </bean>
+
+    <bean id="userCredentialsServiceImpl" class="se.lexicon.service.implementation.UserCredentialsServiceImpl">
+        <constructor-arg ref="userCredentialsDAOCollectionImpl" />
+        <constructor-arg ref="userCredentialsIdSequencerImpl" />
+        <constructor-arg ref="userCredentialsFactoryServiceImpl"/>
+    </bean>
+
+    <bean id="todoItemServiceImpl" class="se.lexicon.service.implementation.TodoItemServiceImpl">
+        <constructor-arg ref="userCredentialsDAOCollectionImpl" />
+        <constructor-arg ref="personDAOCollectionImpl" />
+        <constructor-arg ref="todoItemDAOCollectionImpl" />
+        <constructor-arg ref="todoItemFactoryServiceImpl" />
+        <constructor-arg ref="todoItemIdSequencerImpl" />
+    </bean>
 </beans>
-
-
-
-
-

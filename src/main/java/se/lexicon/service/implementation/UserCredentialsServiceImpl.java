@@ -17,7 +17,10 @@ public class UserCredentialsServiceImpl implements UserCredentialsService {
     private final UserCredentialsIdSequencer sequencer;
     private final UserCredentialsFactoryService factoryService;
 
-    public UserCredentialsServiceImpl(UserCredentialsDAO dao, UserCredentialsIdSequencer sequencer, UserCredentialsFactoryService factoryService) {
+    public UserCredentialsServiceImpl(
+            UserCredentialsDAO dao,
+            UserCredentialsIdSequencer sequencer,
+            UserCredentialsFactoryService factoryService) {
         this.dao = dao;
         this.sequencer = sequencer;
         this.factoryService = factoryService;
