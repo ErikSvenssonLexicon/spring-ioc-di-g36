@@ -13,7 +13,13 @@ public class App
     public static void main( String[] args )
     {
         AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(ApplicationConfig.class);
+                new AnnotationConfigApplicationContext();
+
+        context.scan("se.lexicon.config");
+
+
+
+        Stream.of(context.getBeanDefinitionNames()).forEach(System.out::println);
 
         PersonDAO personDAO = context.getBean(PersonDAO.class);
 
