@@ -1,5 +1,6 @@
 package se.lexicon.service.factory;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import se.lexicon.model.dto.PersonDTO;
@@ -17,47 +18,20 @@ import java.util.List;
 @Component
 public class PersonFactoryServiceImpl implements PersonFactoryService {
 
-    private UserCredentialsFactoryService userCredentialsFactoryService;
-    private TodoItemFactoryService todoItemFactoryService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public void setUserCredentialsFactoryService(UserCredentialsFactoryService userCredentialsFactoryService) {
-        this.userCredentialsFactoryService = userCredentialsFactoryService;
-    }
-
-    @Autowired
-    public void setTodoItemFactoryService(TodoItemFactoryService todoItemFactoryService) {
-        this.todoItemFactoryService = todoItemFactoryService;
+    public PersonFactoryServiceImpl(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public PersonDTO convertToDTO(Person person) {
-        PersonDTO personDTO = null;
-        if(person != null){
-            personDTO = new PersonDTO();
-            personDTO.setId(person.getId());
-            personDTO.setEmail(person.getEmail());
-            personDTO.setFirstName(person.getFirstName());
-            personDTO.setLastName(person.getLastName());
-            personDTO.setUserCredentials(userCredentialsFactoryService.convertToDTO(person.getUserCredentials()));
-            List<TodoItemDTOBasic> dtoBasicList = new ArrayList<>();
-            for(TodoItem todoItem : person.getTodoItems()){
-                dtoBasicList.add(todoItemFactoryService.convertToBasicDTO(todoItem));
-            }
-            personDTO.setTodoItems(dtoBasicList);
-        }
-        return personDTO;
+        return modelMapper.map(person, PersonDTO.class);
     }
 
     @Override
     public PersonDTOBasic convertToBasicDTO(Person person) {
-        PersonDTOBasic personDTO = new PersonDTOBasic();
-        if(person != null){
-            personDTO.setId(person.getId());
-            personDTO.setEmail(person.getEmail());
-            personDTO.setFirstName(person.getFirstName());
-            personDTO.setLastName(person.getLastName());
-        }
-        return personDTO;
+        return modelMapper.map(person, PersonDTOBasic.class);
     }
 }

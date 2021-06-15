@@ -1,5 +1,6 @@
 package se.lexicon.service.factory;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import se.lexicon.model.dto.PersonDTOBasic;
@@ -16,48 +17,19 @@ import java.util.List;
 @Component
 public class TodoItemFactoryServiceImpl implements TodoItemFactoryService {
 
-    private PersonFactoryService personFactoryService;
+    private final ModelMapper modelMapper;
 
-
-    @Autowired
-    public void setPersonFactoryService(PersonFactoryService personFactoryService) {
-        this.personFactoryService = personFactoryService;
+    public TodoItemFactoryServiceImpl(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public TodoItemDTO convertToDTO(TodoItem todoItem) {
-        TodoItemDTO todoItemDTO = null;
-        if(todoItem != null){
-            todoItemDTO = new TodoItemDTO();
-            todoItemDTO.setId(todoItem.getId());
-            todoItemDTO.setTopic(todoItem.getTopic());
-            todoItemDTO.setDescription(todoItem.getDescription());
-            todoItemDTO.setDone(todoItemDTO.isDone());
-            todoItemDTO.setPayment(todoItem.getPayment());
-
-            List<PersonDTOBasic> personDTOBasicList = new ArrayList<>();
-            for(Person person : todoItem.getAssignees()){
-                personDTOBasicList.add(personFactoryService.convertToBasicDTO(person));
-            }
-
-            todoItemDTO.setAssignees(personDTOBasicList);
-            todoItemDTO.setOwner(personFactoryService.convertToBasicDTO(todoItem.getOwner()));
-        }
-        return todoItemDTO;
+        return modelMapper.map(todoItem, TodoItemDTO.class);
     }
 
     @Override
     public TodoItemDTOBasic convertToBasicDTO(TodoItem todoItem) {
-        TodoItemDTOBasic todoItemDTOBasic = null;
-        if(todoItem != null){
-            todoItemDTOBasic = new TodoItemDTOBasic();
-            todoItemDTOBasic.setId(todoItem.getId());
-            todoItemDTOBasic.setTopic(todoItem.getTopic());
-            todoItemDTOBasic.setDescription(todoItem.getDescription());
-            todoItemDTOBasic.setPayment(todoItem.getPayment());
-            todoItemDTOBasic.setDone(todoItem.isDone());
-            todoItemDTOBasic.setOwner(personFactoryService.convertToBasicDTO(todoItem.getOwner()));
-        }
-        return todoItemDTOBasic;
+        return modelMapper.map(todoItem, TodoItemDTOBasic.class);
     }
 }
